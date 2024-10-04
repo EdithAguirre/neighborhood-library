@@ -11,15 +11,15 @@ public class NeighborhoodLibraryApp {
         Book[] books = new Book[20];
 
         // Adding books
-        books[0] = new Book(1,"qwe", "The Clean Coder: ", false, "(no one)");
-        books[1] = new Book(2, "rty", "Code Reading", false, "(no one)");
-        books[2] = new Book(3, "uio", "Code Craft", false, "(no one)");
-        books[3] = new Book(4,"pas", "The Self-Taught Programmer", false, "(no one)");
-        books[4] = new Book(5, "dfg","Coders at Work", false, "(no one)");
-        books[5] = new Book(6, "hjk", "Java: The Good Parts", false, "(no one)");
-        books[6] = new Book(7, "lzx", "Clojure Programming", false, "(no one)");
-        books[7] = new Book(8, "cvb", "Java in a Nutshell", false, "(no one)");
-        books[8] = new Book(9, "rgb", "The Way to Go", false, "(no one)");
+        books[0] = new Book(1,"978-1-98765-432-1", "The Clean Coder", true, "Sandra");
+        books[1] = new Book(2, "978-1-98765-433-8", "Code Reading", false, "(no one)");
+        books[2] = new Book(3, "978-1-98765-434-5", "Code Craft", false, "(no one)");
+        books[3] = new Book(4,"978-1-98765-435-2", "The Self-Taught Programmer", false, "(no one)");
+        books[4] = new Book(5, "978-1-98765-436-9","Coders at Work", false, "(no one)");
+        books[5] = new Book(6, "978-1-98765-437-6", "Java: The Good Parts", false, "(no one)");
+        books[6] = new Book(7, "978-1-98765-438-3", "Clojure Programming", true, "Anthony");
+        books[7] = new Book(8, "978-1-98765-439-0", "Java in a Nutshell", false, "(no one)");
+        books[8] = new Book(9, "978-1-98765-440-6", "The Way to Go", false, "(no one)");
 
         int option;
         do {
@@ -33,7 +33,6 @@ public class NeighborhoodLibraryApp {
                     Enter an option (1,2, or 3): """);
             option = scanner.nextInt();
 
-            System.out.println(books.length);
             // Direct the user to the method that performs the selected option
             switch (option) {
                 case 1:
@@ -54,12 +53,9 @@ public class NeighborhoodLibraryApp {
         // Displays a list of all books that are not currently checked out
         System.out.println("Available Books: ");
         for(int i = 0; i < books.length - 1 && books[i] != null; i++){
-            if(books[i].isCheckedOut()){
-                return;
-            }
-            else{
+            if(!books[i].isCheckedOut()) {
                 System.out.println("Book ID: " + books[i].getId() + ", ISBN: " + books[i].getIsbn()
-                                    + "Book Title: " + books[i].getTitle());
+                        + " Book Title: " + books[i].getTitle());
             }
         }
 
@@ -82,7 +78,14 @@ public class NeighborhoodLibraryApp {
     }
 
     public static void showCheckedOutBooks(Book[] books){
-        // Display a list of all the
+        // Display a list of all the books that are currently checked out
+        System.out.println("Checked Out Books: ");
+        for(int i = 0; i < books.length - 1 && books[i] != null; i++){
+            if(books[i].isCheckedOut()) {
+                System.out.println("Book ID: " + books[i].getId() + ", ISBN: " + books[i].getIsbn()
+                        + " Book Title: " + books[i].getTitle());
+            }
+        }
 
     }
 }
