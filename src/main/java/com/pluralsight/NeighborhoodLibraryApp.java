@@ -39,7 +39,7 @@ public class NeighborhoodLibraryApp {
                     showAvailableBooks(books, scanner);
                     break;
                 case 2:
-                    showCheckedOutBooks(books);
+                    showCheckedOutBooks(books, scanner);
                     break;
                 case 3:
                     return;
@@ -60,16 +60,17 @@ public class NeighborhoodLibraryApp {
         }
 
         // Prompt the user to either select a book to check out, or exit to go back to home screen
-        System.out.println("\nSelect a book to check out by typing the book ID or type 0 to exit: ");
+        System.out.print("\nSelect a book to check out by typing the book ID or type 0 to exit: ");
         int choice = scanner.nextInt();
-        scanner.nextLine();
+
         if(choice != 0){
-            System.out.println("Please enter your name: ");
-            String name = scanner.nextLine();
             for(int i = 0; i < books.length - 1 && books[i] != null; i++){
-                if(choice == books[i].getId()){
+                if(choice == books[i].getId() && !books[i].isCheckedOut){
+                    System.out.print("Please enter your name: ");
+                    scanner.nextLine();
+                    String name = scanner.nextLine();
                     books[i].checkOut(name);
-                    System.out.println(books[i].getTitle() + " " + books[i].isCheckedOut + " ");
+                    System.out.println("The book: \"" + books[i].getTitle() + "\" has been checked out.\n");
                 }
             }
         }
@@ -77,15 +78,30 @@ public class NeighborhoodLibraryApp {
 
     }
 
-    public static void showCheckedOutBooks(Book[] books){
+    public static void showCheckedOutBooks(Book[] books, Scanner scanner){
         // Display a list of all the books that are currently checked out
         System.out.println("Checked Out Books: ");
         for(int i = 0; i < books.length - 1 && books[i] != null; i++){
             if(books[i].isCheckedOut()) {
                 System.out.println("Book ID: " + books[i].getId() + ", ISBN: " + books[i].getIsbn()
-                        + " Book Title: " + books[i].getTitle());
+                        + ", Book Title: " + books[i].getTitle() + ", Checked Out to: " + books[i].checkedOutTo);
             }
         }
 
+        // Prompt user to check in a book or go back to home screen
+        System.out.print("Done! What would you like to do next? \n" +
+                "(C) - to Check In a book \n" +
+                "(X) - to go back to the home screen\n" +
+                "Select and option (C or X): ");
+
+        String option = scanner.nextLine();
+
+        if(option.equalsIgnoreCase("C")){
+
+        }
+        else if(option.equalsIgnoreCase("X")){
+
+        }
     }
+
 }
